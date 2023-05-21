@@ -20,14 +20,14 @@ const { Winner } = require("../models/winners.model");
  *           type: string
  *           example: 4/20/2022, 2:21:56 PM
  */
-async function getAllWinners() {
+const getAllWinners = async () => {
   try {
     const winners = await Winner.findAll();
     return winners;
   } catch (error) {
     throw { status: 500, message: error?.message || error };
   }
-}
+};
 
 const getOneWinner = async (winnerId) => {};
 
