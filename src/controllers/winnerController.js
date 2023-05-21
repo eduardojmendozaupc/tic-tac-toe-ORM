@@ -73,12 +73,7 @@ const deleteOneWinner = async (req, res) => {
   const {
     params: { winnerId },
   } = req;
-  if (!winnerId) {
-    res.status(400).send({
-      status: "FAILED",
-      data: { error: "Parameter ':winnerId' can not be empty" },
-    });
-  }
+
   try {
     const deletedWinner = await winnerService.deleteOneWinner(winnerId);
     res.status(204).send({ status: "OK", data: deletedWinner });

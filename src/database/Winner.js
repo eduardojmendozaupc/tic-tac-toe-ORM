@@ -29,24 +29,40 @@ const getAllWinners = async () => {
   }
 };
 
-const getOneWinner = async (winnerId) => {};
-
-const createNewWinner = async (newWinner) => {
+const getOneWinner = async (winnerId) => {
   try {
+    const winner = await Winner.findByPk(winnerId);
+    return winner;
   } catch (error) {
     throw { status: 500, message: error?.message || error };
   }
 };
 
-const updateOneWinner = (winnerId, changes) => {
+const createNewWinner = async (newWinner) => {
   try {
+    const createdWinner = await Winner.create(newWinner);
+    return createdWinner;
+  } catch (error) {
+    throw { status: 500, message: error?.message || error };
+  }
+};
+
+const updateOneWinner = async (winnerId, changes) => {
+  try {
+    const updatedWinner = await Winner.update(changes, { where: { id: winnerId } });
+    return updatedWinner;
   } catch (error) {
     throw { status: error?.status || 500, message: error?.message || error };
   }
 };
 
-const deleteOneWinner = (winnerId) => {
+const deleteOneWinner = async (winnerId) => {
   try {
+    if (!(await Winner.findByPk(winnerId))) {
+      throw new Error("No sen econtró el elemento");
+    }
+    const deletedWinner = await Winner.destroy({ where: { id: winnerId } });
+    return deletedWinner;
   } catch (error) {
     throw { status: error?.status || 500, message: error?.message || error };
   }

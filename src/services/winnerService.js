@@ -22,7 +22,6 @@ const getOneWinner = async (winnerId) => {
 const createNewWinner = async (newWinner) => {
   const winnerToInsert = {
     ...newWinner,
-    id: uuid(),
     fecha: new Date().toLocaleString("en-US", { timeZone: "America/Bogota" }),
     actualizado: new Date().toLocaleString("en-US", { timeZone: "America/Bogota" }),
   };
